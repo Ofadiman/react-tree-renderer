@@ -83,11 +83,17 @@ export const generateId = () => {
 }
 
 export const fillWebsiteMapWithPlaceholders = (node: Node) => {
-  const desiredChildrenCount = node.children.length * 2 + 1
+  const desiredChildrenCount = node.children.length * 2 - 1
   const newChildren: Node[] = []
 
   for (let i = 0; i < desiredChildrenCount; i++) {
     if (i % 2 === 0) {
+      const child = node.children[i / 2]
+      if (child.children.length > 0) {
+        fillWebsiteMapWithPlaceholders(child)
+      }
+      newChildren.push(child)
+    } else {
       const id = generateId()
       const placeholder: Node = {
         children: [],
@@ -100,12 +106,6 @@ export const fillWebsiteMapWithPlaceholders = (node: Node) => {
       }
 
       newChildren.push(placeholder)
-    } else {
-      const child = node.children[(i - 1) / 2]
-      if (child.children.length > 0) {
-        fillWebsiteMapWithPlaceholders(child)
-      }
-      newChildren.push(child)
     }
   }
 
