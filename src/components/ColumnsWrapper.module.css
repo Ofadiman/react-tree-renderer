@@ -1,0 +1,8 @@
+.wrapper {}
+
+@media (min-width: 764px) {
+  .wrapper {
+    display: flex;
+    margin: 0 auto;
+  }
+}

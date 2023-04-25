@@ -1,7 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
+import styles from './Main.module.css'
 
 export const Main: FC<PropsWithChildren> = (props) => {
-  return (
-    <main style={{ padding: 20, backgroundColor: 'rgba(255, 0, 255, 0.5)' }}>{props.children}</main>
-  )
+  return <main className={styles.wrapper}>{props.children}</main>
 }

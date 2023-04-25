@@ -10,8 +10,10 @@ import { Navbar } from './components/Navbar.tsx'
 import { Square } from './components/Square.tsx'
 import { Placeholder } from './components/Placeholder.tsx'
 import { MockResponse } from './mockResponse.ts'
+import { ColumnsWrapper } from './components/ColumnsWrapper.tsx'
 
 export enum NodeType {
+  ColumnsWrapper = 'columns-wrapper',
   Placeholder = 'placeholder',
   Root = 'root',
   Navbar = 'navbar',
@@ -43,6 +45,7 @@ const componentMapping: Record<NodeType, (props: any) => ReactElement | null> = 
   [NodeType.Navbar]: Navbar,
   [NodeType.Square]: Square,
   [NodeType.Placeholder]: Placeholder,
+  [NodeType.ColumnsWrapper]: ColumnsWrapper,
 }
 
 export const renderNode = (node: Node, placeholdersToRender: Record<string, Object>): ReactNode => {
@@ -137,6 +140,14 @@ export const getWebsiteMap = (response: MockResponse) => {
     props: response.mainMedia,
   }
 
+  const columnsWrapper: Node = {
+    children: [],
+    meta: {},
+    id: 'content-wrapper',
+    type: NodeType.ColumnsWrapper,
+    props: {},
+  }
+
   const main: Node = {
     children: [],
     meta: {},
@@ -152,6 +163,8 @@ export const getWebsiteMap = (response: MockResponse) => {
     type: NodeType.Aside,
     props: {},
   }
+
+  columnsWrapper.children.push(main, aside)
 
   response.content.forEach((element, index) => {
     const node: Node = {
@@ -177,10 +190,7 @@ export const getWebsiteMap = (response: MockResponse) => {
     aside.children.push(node)
   })
 
-  root.children.push(navbar)
-  root.children.push(header)
-  root.children.push(main)
-  root.children.push(aside)
+  root.children.push(navbar, header, columnsWrapper)
 
   return root
 }
