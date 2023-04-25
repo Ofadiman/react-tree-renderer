@@ -11,8 +11,10 @@ import { Square } from './components/Square.tsx'
 import { Placeholder } from './components/Placeholder.tsx'
 import { MockResponse } from './mockResponse.ts'
 import { ColumnsWrapper } from './components/ColumnsWrapper.tsx'
+import { ContentWrapper } from './components/ContentWrapper.tsx'
 
 export enum NodeType {
+  ContentWrapper = 'content-wrapper',
   ColumnsWrapper = 'columns-wrapper',
   Placeholder = 'placeholder',
   Root = 'root',
@@ -46,6 +48,7 @@ const componentMapping: Record<NodeType, (props: any) => ReactElement | null> = 
   [NodeType.Square]: Square,
   [NodeType.Placeholder]: Placeholder,
   [NodeType.ColumnsWrapper]: ColumnsWrapper,
+  [NodeType.ContentWrapper]: ContentWrapper,
 }
 
 export const renderNode = (node: Node, placeholdersToRender: Record<string, Object>): ReactNode => {
@@ -56,12 +59,8 @@ export const renderNode = (node: Node, placeholdersToRender: Record<string, Obje
     return null
   }
 
-  if (node.type === NodeType.Placeholder) {
-    const fromMap = placeholdersToRender[node.id]
-    const shouldRender = fromMap !== undefined
-    if (!shouldRender) {
-      return null
-    }
+  if (node.type === NodeType.Placeholder && placeholdersToRender[node.id] === undefined) {
+    return null
   }
 
   if (node.children.length > 0) {
@@ -116,38 +115,6 @@ export const fillWebsiteMapWithPlaceholders = (node: Node) => {
 }
 
 export const getWebsiteMap = (response: MockResponse) => {
-  const root: Node = {
-    children: [],
-    meta: {},
-    id: 'root',
-    type: NodeType.Root,
-    props: {},
-  }
-
-  const navbar: Node = {
-    children: [],
-    meta: {},
-    id: 'navbar',
-    type: NodeType.Navbar,
-    props: {},
-  }
-
-  const header: Node = {
-    children: [],
-    meta: {},
-    id: 'header',
-    type: NodeType.Header,
-    props: response.mainMedia,
-  }
-
-  const columnsWrapper: Node = {
-    children: [],
-    meta: {},
-    id: 'content-wrapper',
-    type: NodeType.ColumnsWrapper,
-    props: {},
-  }
-
   const main: Node = {
     children: [],
     meta: {},
@@ -164,7 +131,45 @@ export const getWebsiteMap = (response: MockResponse) => {
     props: {},
   }
 
-  columnsWrapper.children.push(main, aside)
+  const columnsWrapper: Node = {
+    children: [main, aside],
+    meta: {},
+    id: 'columns-wrapper',
+    type: NodeType.ColumnsWrapper,
+    props: {},
+  }
+
+  const header: Node = {
+    children: [],
+    meta: {},
+    id: 'header',
+    type: NodeType.Header,
+    props: response.mainMedia,
+  }
+
+  const contentWrapper: Node = {
+    children: [header, columnsWrapper],
+    meta: {},
+    id: 'content-wrapper',
+    type: NodeType.ContentWrapper,
+    props: {},
+  }
+
+  const navbar: Node = {
+    children: [],
+    meta: {},
+    id: 'navbar',
+    type: NodeType.Navbar,
+    props: {},
+  }
+
+  const root: Node = {
+    children: [navbar, contentWrapper],
+    meta: {},
+    id: 'root',
+    type: NodeType.Root,
+    props: {},
+  }
 
   response.content.forEach((element, index) => {
     const node: Node = {
@@ -189,8 +194,6 @@ export const getWebsiteMap = (response: MockResponse) => {
 
     aside.children.push(node)
   })
-
-  root.children.push(navbar, header, columnsWrapper)
 
   return root
 }
