@@ -10,6 +10,7 @@ import {
 import { StrictMode } from 'react'
 import { faker } from '@faker-js/faker'
 import { placeholdersToRender } from './mocks/placeholdersToRender.ts'
+import { PlaceholdersContext } from './context/Placeholders.context.tsx'
 
 faker.seed(1)
 
@@ -26,5 +27,9 @@ if (device === 'desktop') {
 fillWebsiteMapWithPlaceholders(websiteMap, device)
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>{renderNode(websiteMap, placeholdersToRender)}</StrictMode>,
+  <StrictMode>
+    <PlaceholdersContext.Provider value={placeholdersToRender}>
+      {renderNode(websiteMap)}
+    </PlaceholdersContext.Provider>
+  </StrictMode>,
 )

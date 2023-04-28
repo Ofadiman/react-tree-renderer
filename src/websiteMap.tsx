@@ -72,7 +72,7 @@ const componentMapping: Record<NodeType, (props: any) => ReactElement | null> = 
   [NodeType.Teaser]: Teaser,
 }
 
-export const renderNode = (node: Node, placeholdersToRender: Record<string, Object>): ReactNode => {
+export const renderNode = (node: Node): ReactNode => {
   const Component = componentMapping[node.type]
 
   if (!Component) {
@@ -81,9 +81,7 @@ export const renderNode = (node: Node, placeholdersToRender: Record<string, Obje
   }
 
   if (node.children.length > 0) {
-    const children = node.children.map((childNode: any) =>
-      renderNode(childNode, placeholdersToRender),
-    )
+    const children = node.children.map((childNode: any) => renderNode(childNode))
     return (
       <Component {...node.props} key={node.id}>
         {children}

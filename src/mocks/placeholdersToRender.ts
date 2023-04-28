@@ -1,9 +1,9 @@
 export const placeholdersToRender = {
-  1: {
+  '1': {
     prop1: 'value1',
     prop2: 'value2',
   },
-  2: {
+  '5': {
     prop1: 'value1',
     prop2: 'value2',
   },
