@@ -1,12 +1,12 @@
 import { FC } from 'react'
-import { faker } from '@faker-js/faker'
 
 export const Placeholder: FC<{ id: string }> = (props) => {
   return (
     <div
       style={{
-        backgroundColor: faker.color.rgb({ format: 'css', includeAlpha: true }),
+        backgroundColor: 'black',
         padding: 20,
+        color: 'white',
       }}
     >
       renders ad {props.id}

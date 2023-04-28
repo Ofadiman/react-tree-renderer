@@ -184,7 +184,7 @@ export const getWebsiteMapForDesktop = (response: MockResponse) => {
   const footer: Node = {
     children: [],
     meta: {},
-    id: 'navbar',
+    id: 'footer',
     type: NodeType.Footer,
     props: {
       links: response.footerLinks,
@@ -229,6 +229,140 @@ export const getWebsiteMapForDesktop = (response: MockResponse) => {
         main.children.push(node)
       })
 
+      return
+    }
+
+    const node: Node = {
+      props: element,
+      children: [],
+      meta: {},
+      id: `content index: ${index}`,
+      type: element.type,
+    }
+
+    main.children.push(node)
+  })
+
+  main.children.push({
+    props: {
+      authors: response.authors,
+    },
+    children: [],
+    meta: {},
+    id: `authors`,
+    type: NodeType.Authors,
+  })
+
+  main.children.push({
+    props: {
+      sources: response.sources,
+    },
+    children: [],
+    meta: {},
+    id: `sources`,
+    type: NodeType.Sources,
+  })
+
+  response.aside.forEach((element, index) => {
+    const node: Node = {
+      props: element,
+      children: [],
+      meta: {},
+      id: `content index: ${index}`,
+      type: element.type,
+    }
+
+    aside.children.push(node)
+  })
+
+  return root
+}
+
+export const getWebsiteMapForMobile = (response: MockResponse) => {
+  const main: Node = {
+    children: [],
+    meta: {},
+    id: 'main',
+    type: NodeType.Main,
+    props: {},
+  }
+
+  const aside: Node = {
+    children: [],
+    meta: {},
+    id: 'aside',
+    type: NodeType.Aside,
+    props: {},
+  }
+
+  const header: Node = {
+    children: [],
+    meta: {},
+    id: 'header',
+    type: NodeType.Header,
+    props: response.mainMedia,
+  }
+
+  const contentWrapper: Node = {
+    children: [],
+    meta: {},
+    id: 'content-wrapper',
+    type: NodeType.ContentWrapper,
+    props: {},
+  }
+
+  const navbar: Node = {
+    children: [],
+    meta: {},
+    id: 'navbar',
+    type: NodeType.Navbar,
+    props: {},
+  }
+
+  const footer: Node = {
+    children: [],
+    meta: {},
+    id: 'footer',
+    type: NodeType.Footer,
+    props: {
+      links: response.footerLinks,
+    },
+  }
+
+  const root: Node = {
+    children: [navbar, contentWrapper, footer],
+    meta: {},
+    id: 'root',
+    type: NodeType.Root,
+    props: {},
+  }
+
+  contentWrapper.children.push(
+    {
+      props: {
+        lead: response.lead,
+      },
+      children: [],
+      meta: {},
+      id: `lead`,
+      type: NodeType.Lead,
+    },
+    header,
+    main,
+    aside,
+  )
+
+  response.content.forEach((element, index) => {
+    if (element.type === NodeType.Dashboard) {
+      const node: Node = {
+        props: element,
+        children: [],
+        meta: {},
+        id: `content index: ${index}`,
+        type: NodeType.Dashboard,
+      }
+
+      main.children.push(node)
       return
     }
 

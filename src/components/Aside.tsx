@@ -6,7 +6,6 @@ export const Aside: FC<PropsWithChildren> = (props) => {
     <aside
       style={{
         padding: 20,
-        width: 150,
         backgroundColor: faker.color.rgb({ format: 'css', includeAlpha: true }),
       }}
     >
