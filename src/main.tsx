@@ -1,8 +1,15 @@
 import './global.css'
 import ReactDOM from 'react-dom/client'
 import { mockResponse } from './mockResponse.ts'
-import { fillWebsiteMapWithPlaceholders, getWebsiteMapForDesktop, renderNode } from './websiteMap.tsx'
+import {
+  fillWebsiteMapWithPlaceholders,
+  getWebsiteMapForDesktop,
+  renderNode,
+} from './websiteMap.tsx'
 import { StrictMode } from 'react'
+import { faker } from '@faker-js/faker'
+
+faker.seed(1)
 
 const json = getWebsiteMapForDesktop(mockResponse)
 console.log('json', json)

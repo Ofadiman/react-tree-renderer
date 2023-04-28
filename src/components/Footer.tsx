@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { faker } from '@faker-js/faker'
 
 export const Footer: FC<{ links: Array<{ text: string; to: string }> }> = (props) => {
   return (
@@ -7,10 +8,10 @@ export const Footer: FC<{ links: Array<{ text: string; to: string }> }> = (props
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'rgba(40, 200, 245, 0.5)',
+        backgroundColor: faker.color.rgb({ format: 'css', includeAlpha: true }),
         flexDirection: 'column',
         gap: 20,
-        padding: 20
+        padding: 20,
       }}
     >
       {props.links.map((link) => {
