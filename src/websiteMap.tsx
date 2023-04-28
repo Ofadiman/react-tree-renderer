@@ -98,7 +98,23 @@ export const generateId = () => {
   return id.toString()
 }
 
-export const fillWebsiteMapWithPlaceholders = (node: Node) => {
+export const fillWebsiteMapWithPlaceholders = (node: Node, device: string) => {
+  if (node.type === NodeType.ColumnsWrapper && device === 'desktop') {
+    const newChildren: Node[] = []
+
+    for (let i = 0; i < node.children.length; i++) {
+      const child = node.children[i]
+      if (child.children.length > 0) {
+        fillWebsiteMapWithPlaceholders(child, device)
+      }
+      newChildren.push(child)
+    }
+
+    node.children = newChildren
+
+    return
+  }
+
   const desiredChildrenCount = node.children.length * 2 - 1
   const newChildren: Node[] = []
 
@@ -106,7 +122,7 @@ export const fillWebsiteMapWithPlaceholders = (node: Node) => {
     if (i % 2 === 0) {
       const child = node.children[i / 2]
       if (child.children.length > 0) {
-        fillWebsiteMapWithPlaceholders(child)
+        fillWebsiteMapWithPlaceholders(child, device)
       }
       newChildren.push(child)
     } else {

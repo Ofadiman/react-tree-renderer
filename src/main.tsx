@@ -23,7 +23,7 @@ if (device === 'desktop') {
   websiteMap = getWebsiteMapForMobile(apiResponse)
 }
 
-fillWebsiteMapWithPlaceholders(websiteMap)
+fillWebsiteMapWithPlaceholders(websiteMap, device)
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>{renderNode(websiteMap, placeholdersToRender)}</StrictMode>,
