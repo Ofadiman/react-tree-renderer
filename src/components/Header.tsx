@@ -5,9 +5,9 @@ export const Header: FC<{ title: string; description: string; source: string }> 
     <header
       className={'bg-emerald-400 p-5 aspect-video flex items-center justify-center gap-4 flex-col'}
     >
-      <p>title: {props.title}</p>
-      <p>description: {props.description}</p>
-      <p>source: {props.source}</p>
+      <p>{props.title}</p>
+      <p>{props.description}</p>
+      <p>{props.source}</p>
     </header>
   )
 }
