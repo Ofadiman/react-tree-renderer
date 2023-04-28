@@ -9,11 +9,42 @@ export const mockResponse = {
     },
     {
       type: NodeType.Paragraph,
-      lines: 'first paragraph',
+      lines:
+        'Duis dictum ac ipsum vel auctor. Donec sodales magna a arcu faucibus tincidunt. Donec quis ultricies ipsum.',
     },
     {
       type: NodeType.Html,
       html: '<div>renders html</div>',
+    },
+    {
+      type: NodeType.Paragraph,
+      lines:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent odio leo, maximus id pulvinar sit amet, scelerisque at dolor. Integer aliquam in leo sed pharetra. Suspendisse a magna auctor, vehicula arcu non, venenatis tellus.',
+    },
+    {
+      type: NodeType.Dashboard,
+      items: [
+        {
+          text: 'first dashboard element',
+        },
+        {
+          text: 'second dashboard element',
+        },
+        {
+          text: 'third dashboard element',
+        },
+        {
+          text: 'fourth dashboard element',
+        },
+        {
+          text: 'fifth dashboard element',
+        },
+      ],
+    },
+    {
+      type: NodeType.Paragraph,
+      lines:
+        'Pellentesque aliquam, mi sed vehicula porttitor, ex lacus lobortis metus, vel efficitur orci nulla quis diam. Vestibulum consectetur sapien vel sem hendrerit, vitae eleifend diam vehicula. Nunc ac dui pulvinar, venenatis nibh id, maximus est.',
     },
   ],
   aside: [

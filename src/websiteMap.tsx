@@ -16,6 +16,8 @@ import { Footer } from './components/Footer'
 import { Authors } from './components/Authors'
 import { Sources } from './components/Sources'
 import { Lead } from './components/Lead'
+import { Dashboard } from './components/Dashboard'
+import { DashboardItem } from './components/DashboardItem'
 
 export enum NodeType {
   ContentWrapper = 'content-wrapper',
@@ -34,6 +36,8 @@ export enum NodeType {
   Authors = 'authors',
   Sources = 'sources',
   Lead = 'lead',
+  Dashboard = 'dashboard',
+  DashboardItem = 'dashboard-item',
 }
 
 export type Node = {
@@ -61,6 +65,8 @@ const componentMapping: Record<NodeType, (props: any) => ReactElement | null> = 
   [NodeType.Authors]: Authors,
   [NodeType.Sources]: Sources,
   [NodeType.Lead]: Lead,
+  [NodeType.Dashboard]: Dashboard,
+  [NodeType.DashboardItem]: DashboardItem,
 }
 
 export const renderNode = (node: Node, placeholdersToRender: Record<string, Object>): ReactNode => {
@@ -208,6 +214,24 @@ export const getWebsiteMapForDesktop = (response: MockResponse) => {
   )
 
   response.content.forEach((element, index) => {
+    if (element.type === NodeType.Dashboard) {
+      element.items?.forEach((item, itemIndex) => {
+        const node: Node = {
+          props: {
+            text: item.text,
+          },
+          children: [],
+          meta: {},
+          id: `content index: ${index} ${itemIndex}`,
+          type: NodeType.DashboardItem,
+        }
+
+        main.children.push(node)
+      })
+
+      return
+    }
+
     const node: Node = {
       props: element,
       children: [],
