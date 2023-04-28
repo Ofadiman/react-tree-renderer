@@ -43,6 +43,10 @@ export const apiResponse = {
       type: NodeType.Paragraph,
       lines: 'Third paragraph',
     },
+    {
+      type: NodeType.Teaser,
+      catchPhrase: 'Try boiling chocolate kebab brushed with coffee.',
+    },
   ],
   aside: [
     {

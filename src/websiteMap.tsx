@@ -18,6 +18,7 @@ import { Sources } from './components/Sources'
 import { Lead } from './components/Lead'
 import { Dashboard } from './components/Dashboard'
 import { DashboardItem } from './components/DashboardItem'
+import { Teaser } from './components/Teaser.tsx'
 
 export enum NodeType {
   ContentWrapper = 'content-wrapper',
@@ -38,6 +39,7 @@ export enum NodeType {
   Lead = 'lead',
   Dashboard = 'dashboard',
   DashboardItem = 'dashboard-item',
+  Teaser = 'teaser',
 }
 
 export type Node = {
@@ -67,6 +69,7 @@ const componentMapping: Record<NodeType, (props: any) => ReactElement | null> = 
   [NodeType.Lead]: Lead,
   [NodeType.Dashboard]: Dashboard,
   [NodeType.DashboardItem]: DashboardItem,
+  [NodeType.Teaser]: Teaser,
 }
 
 export const renderNode = (node: Node, placeholdersToRender: Record<string, Object>): ReactNode => {
@@ -226,6 +229,10 @@ export const getWebsiteMapForDesktop = (response: MockResponse) => {
   )
 
   response.content.forEach((element, index) => {
+    if (element.type === NodeType.Teaser) {
+      return
+    }
+
     if (element.type === NodeType.Dashboard) {
       element.items?.forEach((item, itemIndex) => {
         const node: Node = {
