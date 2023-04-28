@@ -9,7 +9,7 @@ export const Placeholder: FC<{ id: string }> = (props) => {
         color: 'white',
       }}
     >
-      renders ad {props.id}
+      renders ad placeholder #{props.id}
     </div>
   )
 }

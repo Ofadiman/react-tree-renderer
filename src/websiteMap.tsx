@@ -77,10 +77,6 @@ export const renderNode = (node: Node, placeholdersToRender: Record<string, Obje
     return null
   }
 
-  if (node.type === NodeType.Placeholder && placeholdersToRender[node.id] === undefined) {
-    return null
-  }
-
   if (node.children.length > 0) {
     const children = node.children.map((childNode: any) =>
       renderNode(childNode, placeholdersToRender),
