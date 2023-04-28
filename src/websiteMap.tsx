@@ -14,6 +14,7 @@ import { ColumnsWrapper } from './components/ColumnsWrapper.tsx'
 import { ContentWrapper } from './components/ContentWrapper.tsx'
 import { Footer } from './components/Footer'
 import { Authors } from './components/Authors'
+import { Sources } from './components/Sources'
 
 export enum NodeType {
   ContentWrapper = 'content-wrapper',
@@ -30,6 +31,7 @@ export enum NodeType {
   Square = 'square',
   Footer = 'footer',
   Authors = 'authors',
+  Sources = 'sources',
 }
 
 export type Node = {
@@ -55,6 +57,7 @@ const componentMapping: Record<NodeType, (props: any) => ReactElement | null> = 
   [NodeType.ContentWrapper]: ContentWrapper,
   [NodeType.Footer]: Footer,
   [NodeType.Authors]: Authors,
+  [NodeType.Sources]: Sources,
 }
 
 export const renderNode = (node: Node, placeholdersToRender: Record<string, Object>): ReactNode => {
@@ -207,6 +210,16 @@ export const getWebsiteMapForDesktop = (response: MockResponse) => {
     meta: {},
     id: `authors`,
     type: NodeType.Authors,
+  })
+
+  main.children.push({
+    props: {
+      sources: response.sources,
+    },
+    children: [],
+    meta: {},
+    id: `sources`,
+    type: NodeType.Sources,
   })
 
   response.aside.forEach((element, index) => {
