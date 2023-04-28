@@ -55,6 +55,20 @@ export const mockResponse = {
       source: 'second source',
     },
   ],
+  footerLinks: [
+    {
+      text: 'facebook',
+      to: 'https://www.facebook.com/',
+    },
+    {
+      text: 'youtube',
+      to: 'https://www.youtube.com/',
+    },
+    {
+      text: 'instagram',
+      to: 'https://www.instagram.com/',
+    },
+  ],
 }
 
 export type MockResponse = typeof mockResponse

@@ -12,6 +12,7 @@ import { Placeholder } from './components/Placeholder.tsx'
 import { MockResponse } from './mockResponse.ts'
 import { ColumnsWrapper } from './components/ColumnsWrapper.tsx'
 import { ContentWrapper } from './components/ContentWrapper.tsx'
+import { Footer } from './components/Footer'
 
 export enum NodeType {
   ContentWrapper = 'content-wrapper',
@@ -26,6 +27,7 @@ export enum NodeType {
   Paragraph = 'paragraph',
   Html = 'html',
   Square = 'square',
+  Footer = 'footer',
 }
 
 export type Node = {
@@ -49,6 +51,7 @@ const componentMapping: Record<NodeType, (props: any) => ReactElement | null> = 
   [NodeType.Placeholder]: Placeholder,
   [NodeType.ColumnsWrapper]: ColumnsWrapper,
   [NodeType.ContentWrapper]: ContentWrapper,
+  [NodeType.Footer]: Footer,
 }
 
 export const renderNode = (node: Node, placeholdersToRender: Record<string, Object>): ReactNode => {
@@ -114,7 +117,7 @@ export const fillWebsiteMapWithPlaceholders = (node: Node) => {
   node.children = newChildren
 }
 
-export const getWebsiteMap = (response: MockResponse) => {
+export const getWebsiteMapForDesktop = (response: MockResponse) => {
   const main: Node = {
     children: [],
     meta: {},
@@ -163,8 +166,18 @@ export const getWebsiteMap = (response: MockResponse) => {
     props: {},
   }
 
+  const footer: Node = {
+    children: [],
+    meta: {},
+    id: 'navbar',
+    type: NodeType.Footer,
+    props: {
+      links: response.footerLinks,
+    },
+  }
+
   const root: Node = {
-    children: [navbar, contentWrapper],
+    children: [navbar, contentWrapper, footer],
     meta: {},
     id: 'root',
     type: NodeType.Root,

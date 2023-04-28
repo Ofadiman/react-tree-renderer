@@ -1,10 +1,10 @@
 import './global.css'
 import ReactDOM from 'react-dom/client'
 import { mockResponse } from './mockResponse.ts'
-import { fillWebsiteMapWithPlaceholders, getWebsiteMap, renderNode } from './websiteMap.tsx'
+import { fillWebsiteMapWithPlaceholders, getWebsiteMapForDesktop, renderNode } from './websiteMap.tsx'
 import { StrictMode } from 'react'
 
-const json = getWebsiteMap(mockResponse)
+const json = getWebsiteMapForDesktop(mockResponse)
 console.log('json', json)
 fillWebsiteMapWithPlaceholders(json)
 console.log('map', json)
