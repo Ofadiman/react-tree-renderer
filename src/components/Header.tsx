@@ -1,19 +1,13 @@
 import { FC } from 'react'
-import { faker } from '@faker-js/faker'
 
 export const Header: FC<{ title: string; description: string; source: string }> = (props) => {
   return (
     <header
-      style={{
-        aspectRatio: '16/9',
-        backgroundColor: faker.color.rgb({ format: 'css', includeAlpha: true }),
-        padding: 20,
-      }}
+      className={'bg-emerald-400 p-5 aspect-video flex items-center justify-center gap-4 flex-col'}
     >
-      <p>Simulating something real here</p>
-      <p>{props.title}</p>
-      <p>{props.description}</p>
-      <p>{props.source}</p>
+      <p>title: {props.title}</p>
+      <p>description: {props.description}</p>
+      <p>source: {props.source}</p>
     </header>
   )
 }

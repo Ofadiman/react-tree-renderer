@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { faker } from '@faker-js/faker'
 
 export const Sources: FC<{ sources: Array<{ id: string; source: string }> }> = (props) => {
   if (props.sources.length === 0) {
@@ -7,14 +6,6 @@ export const Sources: FC<{ sources: Array<{ id: string; source: string }> }> = (
   }
 
   const joined = props.sources.map((source) => source.source).join(', ')
-  return (
-    <p
-      style={{
-        padding: 20,
-        backgroundColor: faker.color.rgb({ format: 'css', includeAlpha: true }),
-      }}
-    >
-      {joined}
-    </p>
-  )
+
+  return <p className={'bg-lime-400 p-5'}>{joined}</p>
 }

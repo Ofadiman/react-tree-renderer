@@ -1,15 +1,5 @@
 import { FC } from 'react'
-import { faker } from '@faker-js/faker'
 
 export const Heading: FC<{ type: string; content: string }> = (props) => {
-  return (
-    <h1
-      style={{
-        padding: 20,
-        backgroundColor: faker.color.rgb({ format: 'css', includeAlpha: true }),
-      }}
-    >
-      {props.content}
-    </h1>
-  )
+  return <h1 className={'p-5 bg-lime-400'}>{props.content}</h1>
 }

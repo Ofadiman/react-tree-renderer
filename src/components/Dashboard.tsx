@@ -1,25 +1,14 @@
 import { FC } from 'react'
-import { faker } from '@faker-js/faker'
 
 export const Dashboard: FC<{ items: Array<{ text: string }> }> = (props) => {
-  console.log(props)
   return (
-    <div
-      style={{
-        backgroundColor: faker.color.rgb({ format: 'css', includeAlpha: true }),
-        padding: 20,
-      }}
-    >
+    <div className={'bg-lime-400 p-5'}>
       <p>this is dashboard rendered on a mobile device</p>
-      <div style={{ display: 'flex', overflowX: 'auto', padding: 20 }}>
+      <div className={'flex overflow-x-auto'}>
         {props.items.map((item: any) => {
           return (
             <div
-              style={{
-                padding: 20,
-                minWidth: 500,
-                backgroundColor: faker.color.rgb({ format: 'css', includeAlpha: true }),
-              }}
+              className={'p-5 min-w-[500px] mr-4 text-center last:mr-0 bg-purple-400'}
               key={item.text}
             >
               {item.text}

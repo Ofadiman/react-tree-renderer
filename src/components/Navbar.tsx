@@ -1,15 +1,9 @@
 import { FC } from 'react'
-import { faker } from '@faker-js/faker'
 
 export const Navbar: FC = () => {
   return (
-    <nav
-      style={{
-        backgroundColor: faker.color.rgb({ format: 'css', includeAlpha: true }),
-        height: 64,
-      }}
-    >
-      this is hardcoded navbar
+    <nav className={'h-16 bg-blue-400 text-white flex justify-center items-center'}>
+      <p>this is hardcoded navbar</p>
     </nav>
   )
 }
