@@ -13,6 +13,7 @@ import { MockResponse } from './mockResponse.ts'
 import { ColumnsWrapper } from './components/ColumnsWrapper.tsx'
 import { ContentWrapper } from './components/ContentWrapper.tsx'
 import { Footer } from './components/Footer'
+import { Authors } from './components/Authors'
 
 export enum NodeType {
   ContentWrapper = 'content-wrapper',
@@ -28,6 +29,7 @@ export enum NodeType {
   Html = 'html',
   Square = 'square',
   Footer = 'footer',
+  Authors = 'authors',
 }
 
 export type Node = {
@@ -52,6 +54,7 @@ const componentMapping: Record<NodeType, (props: any) => ReactElement | null> = 
   [NodeType.ColumnsWrapper]: ColumnsWrapper,
   [NodeType.ContentWrapper]: ContentWrapper,
   [NodeType.Footer]: Footer,
+  [NodeType.Authors]: Authors,
 }
 
 export const renderNode = (node: Node, placeholdersToRender: Record<string, Object>): ReactNode => {
@@ -194,6 +197,16 @@ export const getWebsiteMapForDesktop = (response: MockResponse) => {
     }
 
     main.children.push(node)
+  })
+
+  main.children.push({
+    props: {
+      authors: response.authors,
+    },
+    children: [],
+    meta: {},
+    id: `authors`,
+    type: NodeType.Authors,
   })
 
   response.aside.forEach((element, index) => {

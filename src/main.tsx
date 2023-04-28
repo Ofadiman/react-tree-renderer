@@ -14,7 +14,7 @@ const placeholdersToRender = {
     prop1: 'value1',
     prop2: 'value2',
   },
-  5: {
+  2: {
     prop1: 'value1',
     prop2: 'value2',
   },
