@@ -15,6 +15,7 @@ import { ContentWrapper } from './components/ContentWrapper.tsx'
 import { Footer } from './components/Footer'
 import { Authors } from './components/Authors'
 import { Sources } from './components/Sources'
+import { Lead } from './components/Lead'
 
 export enum NodeType {
   ContentWrapper = 'content-wrapper',
@@ -32,6 +33,7 @@ export enum NodeType {
   Footer = 'footer',
   Authors = 'authors',
   Sources = 'sources',
+  Lead = 'lead',
 }
 
 export type Node = {
@@ -58,6 +60,7 @@ const componentMapping: Record<NodeType, (props: any) => ReactElement | null> = 
   [NodeType.Footer]: Footer,
   [NodeType.Authors]: Authors,
   [NodeType.Sources]: Sources,
+  [NodeType.Lead]: Lead,
 }
 
 export const renderNode = (node: Node, placeholdersToRender: Record<string, Object>): ReactNode => {
@@ -157,7 +160,7 @@ export const getWebsiteMapForDesktop = (response: MockResponse) => {
   }
 
   const contentWrapper: Node = {
-    children: [header, columnsWrapper],
+    children: [],
     meta: {},
     id: 'content-wrapper',
     type: NodeType.ContentWrapper,
@@ -189,6 +192,20 @@ export const getWebsiteMapForDesktop = (response: MockResponse) => {
     type: NodeType.Root,
     props: {},
   }
+
+  contentWrapper.children.push(
+    {
+      props: {
+        lead: response.lead,
+      },
+      children: [],
+      meta: {},
+      id: `lead`,
+      type: NodeType.Lead,
+    },
+    header,
+    columnsWrapper,
+  )
 
   response.content.forEach((element, index) => {
     const node: Node = {
