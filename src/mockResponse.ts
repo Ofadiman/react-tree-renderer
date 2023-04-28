@@ -18,16 +18,16 @@ export const mockResponse = {
   ],
   aside: [
     {
-      type: NodeType.Square,
-      color: 'blue',
+      type: NodeType.Rectangle,
+      text: 'A falsis, silva mirabilis historia.',
     },
     {
-      type: NodeType.Square,
-      color: 'red',
+      type: NodeType.Rectangle,
+      text: 'Poeta magnum parma est.',
     },
     {
-      type: NodeType.Square,
-      color: 'green',
+      type: NodeType.Rectangle,
+      text: 'Nunquam examinare armarium.',
     },
   ],
   mainMedia: {

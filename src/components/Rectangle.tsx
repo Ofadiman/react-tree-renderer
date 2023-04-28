@@ -1,16 +1,15 @@
-import { FC, PropsWithChildren } from 'react'
+import { FC } from 'react'
 import { faker } from '@faker-js/faker'
 
-export const Aside: FC<PropsWithChildren> = (props) => {
+export const Rectangle: FC<{ text: string }> = (props) => {
   return (
-    <aside
+    <div
       style={{
         padding: 20,
-        width: 150,
         backgroundColor: faker.color.rgb({ format: 'css', includeAlpha: true }),
       }}
     >
-      {props.children}
-    </aside>
+      {props.text}
+    </div>
   )
 }

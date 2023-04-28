@@ -7,7 +7,7 @@ import { Paragraph } from './components/Paragraph.tsx'
 import { Aside } from './components/Aside.tsx'
 import { Header } from './components/Header.tsx'
 import { Navbar } from './components/Navbar.tsx'
-import { Square } from './components/Square.tsx'
+import { Rectangle } from './components/Rectangle.tsx'
 import { Placeholder } from './components/Placeholder.tsx'
 import { MockResponse } from './mockResponse.ts'
 import { ColumnsWrapper } from './components/ColumnsWrapper.tsx'
@@ -29,7 +29,7 @@ export enum NodeType {
   Heading = 'heading',
   Paragraph = 'paragraph',
   Html = 'html',
-  Square = 'square',
+  Rectangle = 'rectangle',
   Footer = 'footer',
   Authors = 'authors',
   Sources = 'sources',
@@ -53,7 +53,7 @@ const componentMapping: Record<NodeType, (props: any) => ReactElement | null> = 
   [NodeType.Aside]: Aside,
   [NodeType.Header]: Header,
   [NodeType.Navbar]: Navbar,
-  [NodeType.Square]: Square,
+  [NodeType.Rectangle]: Rectangle,
   [NodeType.Placeholder]: Placeholder,
   [NodeType.ColumnsWrapper]: ColumnsWrapper,
   [NodeType.ContentWrapper]: ContentWrapper,
