@@ -1,5 +1,42 @@
-import { FC } from 'react'
+import { ReactNode } from 'react'
+import { Extension } from '../extension.ts'
+import { NodeType } from '../websiteMap.tsx'
 
-export const Heading: FC<{ type: string; content: string }> = (props) => {
-  return <h1 className={'p-5 bg-lime-400'}>{props.content}</h1>
+export type HeadingNode = {
+  id: string
+  type: NodeType.Heading
+  props: {
+    type: string
+    content: string
+  }
+  meta: {}
+  children: []
+}
+
+type NodeArgs = {
+  type: string
+  content: string
+}
+
+export class HeadingExtension implements Extension<NodeArgs, HeadingNode> {
+  node(args: NodeArgs): HeadingNode {
+    return {
+      id: Math.random().toString(),
+      type: NodeType.Heading,
+      meta: {},
+      props: {
+        type: args.type,
+        content: args.content,
+      },
+      children: [],
+    }
+  }
+
+  render(node: HeadingNode): ReactNode {
+    return (
+      <h1 key={node.id} className={'p-5 bg-lime-400'}>
+        {node.props.content}
+      </h1>
+    )
+  }
 }
