@@ -16,6 +16,7 @@ faker.seed(1)
 
 const urlSearchParams = new URLSearchParams(window.location.search)
 const device = urlSearchParams.get('layout') ?? 'desktop'
+const shouldRenderMap = urlSearchParams.get('map') === 'true'
 
 let websiteMap
 if (device === 'desktop') {
@@ -28,8 +29,12 @@ fillWebsiteMapWithPlaceholders(websiteMap, device)
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
-    <PlaceholdersContext.Provider value={placeholdersToRender}>
-      {renderNode(websiteMap)}
-    </PlaceholdersContext.Provider>
+    {shouldRenderMap ? (
+      <pre>{JSON.stringify(websiteMap, null, 2)}</pre>
+    ) : (
+      <PlaceholdersContext.Provider value={placeholdersToRender}>
+        {renderNode(websiteMap)}
+      </PlaceholdersContext.Provider>
+    )}
   </StrictMode>,
 )
