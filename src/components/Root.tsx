@@ -1,31 +1,22 @@
-import { ReactNode } from 'react'
-import { Extension } from '../extension.ts'
-import { Node, NodeType } from '../websiteMap.tsx'
+import { FC, PropsWithChildren } from 'react'
+import { HeaderNode } from './Header'
+import { MainAsideWrapperNode } from './MainAsideWrapper'
+import { FooterNode } from './Footer'
+import { PlaceholderNode } from './Placeholder'
+import { NodeFactory } from './NodeFactory'
 
-type RootNode = {
-  id: string
-  type: NodeType.Root
-  props: {}
-  children: Node[]
-  meta: {}
+export type RootNode = {
+  id: number
+  type: 'root'
+  children: Array<HeaderNode | MainAsideWrapperNode | FooterNode | PlaceholderNode>
 }
 
-type NodeArgs = {
-  children: Node[]
-}
-
-export class RootExtension implements Extension<NodeArgs, RootNode> {
-  node(args: NodeArgs): RootNode {
-    return {
-      type: NodeType.Root,
-      id: 'root',
-      props: {},
-      children: args.children,
-      meta: {},
-    }
-  }
-
-  render(_node: Node, children: ReactNode): ReactNode {
-    return <>{children}</>
-  }
+export const Root: FC<PropsWithChildren<{ node: RootNode }>> = (props) => {
+  return (
+    <div className="h-screen bg-yellow-50 flex flex-col">
+      {props.node.children.map((child) => {
+        return <NodeFactory key={child.id} node={child}></NodeFactory>
+      })}
+    </div>
+  )
 }

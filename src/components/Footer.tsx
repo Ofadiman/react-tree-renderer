@@ -1,52 +1,30 @@
-import { ReactNode } from 'react'
-import { Extension } from '../extension.ts'
-import { NodeType } from '../websiteMap.tsx'
+import { FC } from 'react'
 
 export type FooterNode = {
-  id: string
-  type: NodeType.Footer
-  props: {
-    links: Array<{ text: string; to: string }>
-  }
+  id: number
+  type: 'footer'
   meta: {
     height: number
   }
-  children: []
-}
-
-type NodeArgs = {
-  links: Array<{ text: string; to: string }>
-}
-
-export class FooterExtension implements Extension<NodeArgs, FooterNode> {
-  node(args: NodeArgs): FooterNode {
-    return {
-      id: 'footer',
-      type: NodeType.Footer,
-      props: {
-        links: args.links,
-      },
-      meta: {
-        height: 500,
-      },
-      children: [],
-    }
+  props: {
+    links: Array<{ to: string; text: string }>
   }
+}
 
-  render(node: FooterNode): ReactNode {
-    return (
-      <footer
-        key={node.id}
-        className={'flex items-center justify-center bg-fuchsia-400 flex-col gap-5 p-5'}
-      >
-        {node.props.links.map((link) => {
+export const Footer: FC<{ node: FooterNode }> = (props) => {
+  return (
+    <footer className="h-[100px] bg-blue-100 flex items-center justify-center">
+      <ul className="flex">
+        {props.node.props.links.map((link) => {
           return (
-            <a href={link.to} key={link.to} className={'text-white hover:underline'}>
-              {link.text}
-            </a>
+            <li key={link.text}>
+              <a href={link.to} className="p-5">
+                {link.text}
+              </a>
+            </li>
           )
         })}
-      </footer>
-    )
-  }
+      </ul>
+    </footer>
+  )
 }

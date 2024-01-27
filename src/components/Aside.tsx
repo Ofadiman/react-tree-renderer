@@ -1,31 +1,19 @@
-import { ReactNode } from 'react'
-import { Extension } from '../extension.ts'
-import { Node, NodeType } from '../websiteMap.tsx'
+import { FC } from 'react'
+import { RectangleNode } from './Rectangle'
+import { NodeFactory } from './NodeFactory'
 
 export type AsideNode = {
-  id: string
-  props: {}
-  children: Node[]
-  type: NodeType.Aside
-  meta: {}
+  id: number
+  type: 'aside'
+  children: RectangleNode[]
 }
 
-export class AsideExtension implements Extension<void, AsideNode> {
-  node(): AsideNode {
-    return {
-      children: [],
-      props: {},
-      meta: {},
-      type: NodeType.Aside,
-      id: 'aside',
-    }
-  }
-
-  render(node: AsideNode, children: ReactNode): ReactNode {
-    return (
-      <aside key={node.id} className={'p-5 bg-yellow-200 h-fit'}>
-        {children}
-      </aside>
-    )
-  }
+export const Aside: FC<{ node: AsideNode }> = (props) => {
+  return (
+    <aside className="w-[240px] h-100 bg-green-100">
+      {props.node.children.map((child) => {
+        return <NodeFactory key={child.id} node={child} />
+      })}
+    </aside>
+  )
 }

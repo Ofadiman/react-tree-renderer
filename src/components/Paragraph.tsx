@@ -1,43 +1,13 @@
-import { ReactNode } from 'react'
-import { NodeType } from '../websiteMap.tsx'
-import { Extension } from '../extension.ts'
+import { FC } from 'react'
 
 export type ParagraphNode = {
-  id: string
-  type: NodeType.Paragraph
-  meta: {
-    length: number
-  }
-  children: []
+  id: number
+  type: 'paragraph'
   props: {
-    lines: string
+    text: string
   }
 }
 
-export type NodeArgs = {
-  lines: string
-}
-
-export class ParagraphExtension implements Extension<NodeArgs, ParagraphNode> {
-  node(args: NodeArgs): ParagraphNode {
-    return {
-      id: Math.random().toString(),
-      meta: {
-        length: args.lines.length,
-      },
-      type: NodeType.Paragraph,
-      props: {
-        lines: args.lines,
-      },
-      children: [],
-    }
-  }
-
-  render(node: ParagraphNode): ReactNode {
-    return (
-      <p key={node.id} className={'p-5 bg-lime-400'}>
-        {node.props.lines}
-      </p>
-    )
-  }
+export const Paragraph: FC<{ node: ParagraphNode }> = (props) => {
+  return <p className="bg-orange-100 py-5">{props.node.props.text}</p>
 }

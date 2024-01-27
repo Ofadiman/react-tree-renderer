@@ -1,52 +1,34 @@
-import { ReactNode } from 'react'
-import { Extension } from '../extension.ts'
-import { NodeType } from '../websiteMap.tsx'
-
-export type NodeArgs = {
-  title: string
-  description: string
-  source: string
-}
+import { FC } from 'react'
 
 export type HeaderNode = {
-  id: string
-  type: NodeType.Header
+  id: number
+  type: 'header'
+  props: {
+    links: Array<{
+      to: string
+      text: string
+    }>
+  }
   meta: {
     height: number
   }
-  children: []
-  props: {
-    title: string
-    description: string
-    source: string
-  }
 }
 
-export class HeaderExtension implements Extension<NodeArgs, HeaderNode> {
-  node(args: NodeArgs): HeaderNode {
-    return {
-      children: [],
-      meta: {
-        height: 400,
-      },
-      id: 'header',
-      type: NodeType.Header,
-      props: args,
-    }
-  }
-
-  render(node: HeaderNode): ReactNode {
-    return (
-      <header
-        key={node.id}
-        className={
-          'bg-emerald-400 p-5 aspect-video flex items-center justify-center gap-4 flex-col'
-        }
-      >
-        <p>{node.props.title}</p>
-        <p>{node.props.description}</p>
-        <p>{node.props.source}</p>
-      </header>
-    )
-  }
+export const Header: FC<{ node: HeaderNode }> = (props) => {
+  return (
+    <header className="h-[60px] bg-yellow-100 flex justify-center items-center pl-4">
+      <div>icon</div>
+      <ul className="ml-auto flex justify-center items-center">
+        {props.node.props.links.map((link) => {
+          return (
+            <li key={link.text}>
+              <a className="p-4" href={link.text}>
+                {link.text}
+              </a>
+            </li>
+          )
+        })}
+      </ul>
+    </header>
+  )
 }

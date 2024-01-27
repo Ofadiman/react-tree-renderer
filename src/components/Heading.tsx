@@ -1,42 +1,13 @@
-import { ReactNode } from 'react'
-import { Extension } from '../extension.ts'
-import { NodeType } from '../websiteMap.tsx'
+import { FC } from 'react'
 
 export type HeadingNode = {
-  id: string
-  type: NodeType.Heading
+  id: number
+  type: 'heading'
   props: {
-    type: string
-    content: string
+    text: string
   }
-  meta: {}
-  children: []
 }
 
-type NodeArgs = {
-  type: string
-  content: string
-}
-
-export class HeadingExtension implements Extension<NodeArgs, HeadingNode> {
-  node(args: NodeArgs): HeadingNode {
-    return {
-      id: Math.random().toString(),
-      type: NodeType.Heading,
-      meta: {},
-      props: {
-        type: args.type,
-        content: args.content,
-      },
-      children: [],
-    }
-  }
-
-  render(node: HeadingNode): ReactNode {
-    return (
-      <h1 key={node.id} className={'p-5 bg-lime-400'}>
-        {node.props.content}
-      </h1>
-    )
-  }
+export const Heading: FC<{ node: HeadingNode }> = (props) => {
+  return <h1 className="bg-cyan-100 py-5">{props.node.props.text}</h1>
 }

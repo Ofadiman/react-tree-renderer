@@ -1,31 +1,22 @@
-import { ReactNode } from 'react'
-import { Node, NodeType } from '../websiteMap.tsx'
-import { Extension } from '../extension.ts'
+import { FC } from 'react'
+import { HeadingNode } from './Heading'
+import { ParagraphNode } from './Paragraph'
+import { HtmlNode } from './Html'
+import { AuthorsNode } from './Authors'
+import { NodeFactory } from './NodeFactory'
 
 export type MainNode = {
-  children: Node[]
-  id: string
-  type: NodeType.Main
-  meta: {}
-  props: {}
+  id: number
+  type: 'main'
+  children: Array<HeadingNode | ParagraphNode | HtmlNode | AuthorsNode>
 }
 
-export class MainExtension implements Extension<void, MainNode> {
-  render(node: Node, children: ReactNode): ReactNode {
-    return (
-      <main key={node.id} className={'flex-grow p-5 bg-purple-400'}>
-        {children}
-      </main>
-    )
-  }
-
-  node(): MainNode {
-    return {
-      children: [],
-      type: NodeType.Main,
-      id: 'main',
-      props: {},
-      meta: {},
-    }
-  }
+export const Main: FC<{ node: MainNode }> = (props) => {
+  return (
+    <main className="grow p-6">
+      {props.node.children.map((child) => {
+        return <NodeFactory key={child.id} node={child} />
+      })}
+    </main>
+  )
 }
