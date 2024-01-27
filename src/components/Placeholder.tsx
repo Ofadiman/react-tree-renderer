@@ -10,9 +10,13 @@ export type PlaceholderNode = {
 }
 
 export const Placeholder: FC<{ node: PlaceholderNode }> = (props) => {
-  const placeholdersIds = usePlaceholdersContext()
+  const context = usePlaceholdersContext()
 
-  if (placeholdersIds.includes(props.node.id)) {
+  if (context.shouldRenderAllPlaceholders) {
+    return <pre className="bg-red-300 p-3">{JSON.stringify(props.node, null, 2)}</pre>
+  }
+
+  if (context.placeholderIds.includes(props.node.id)) {
     return <p className="bg-red-300 p-3">{`Rendering placeholder`}</p>
   }
 

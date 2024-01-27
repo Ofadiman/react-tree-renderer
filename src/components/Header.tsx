@@ -16,7 +16,7 @@ export type HeaderNode = {
 
 export const Header: FC<{ node: HeaderNode }> = (props) => {
   return (
-    <header className="h-[60px] bg-yellow-100 flex justify-center items-center pl-4">
+    <header className="min-h-[60px] bg-yellow-100 flex justify-center items-center pl-4">
       <div>icon</div>
       <ul className="ml-auto flex justify-center items-center">
         {props.node.props.links.map((link) => {

@@ -13,7 +13,7 @@ export type FooterNode = {
 
 export const Footer: FC<{ node: FooterNode }> = (props) => {
   return (
-    <footer className="h-[100px] bg-blue-100 flex items-center justify-center">
+    <footer className="min-h-[100px] bg-blue-100 flex items-center justify-center">
       <ul className="flex">
         {props.node.props.links.map((link) => {
           return (

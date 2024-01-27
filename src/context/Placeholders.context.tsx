@@ -1,6 +1,9 @@
 import { createContext, useContext } from 'react'
 
-export const PlaceholdersContext = createContext<number[] | null>(null)
+export const PlaceholdersContext = createContext<{
+  placeholderIds: number[]
+  shouldRenderAllPlaceholders: boolean
+} | null>(null)
 
 export const usePlaceholdersContext = () => {
   const context = useContext(PlaceholdersContext)

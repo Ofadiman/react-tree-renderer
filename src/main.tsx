@@ -8,6 +8,7 @@ import { PlaceholdersContext } from './context/Placeholders.context.tsx'
 const App = () => {
   const urlSearchParams = new URLSearchParams(window.location.search)
   const shouldRenderMap = urlSearchParams.get('map') === 'true'
+  const shouldRenderAllPlaceholders = urlSearchParams.get('placeholders') === 'true'
   const { root } = useApi()
 
   if (root === null) {
@@ -19,7 +20,9 @@ const App = () => {
   }
 
   return (
-    <PlaceholdersContext.Provider value={[40, 42, 45, 47]}>
+    <PlaceholdersContext.Provider
+      value={{ placeholderIds: [40, 42, 45, 47], shouldRenderAllPlaceholders }}
+    >
       <NodeFactory node={root} />
     </PlaceholdersContext.Provider>
   )
