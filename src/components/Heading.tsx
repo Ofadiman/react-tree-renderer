@@ -9,5 +9,5 @@ export type HeadingNode = {
 }
 
 export const Heading: FC<{ node: HeadingNode }> = (props) => {
-  return <h1 className="bg-cyan-100 py-5">{props.node.props.text}</h1>
+  return <h1 className="bg-cyan-100 p-3">{props.node.props.text}</h1>
 }

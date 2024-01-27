@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client'
 import { StrictMode } from 'react'
 import { useApi } from './api/useApi.ts'
 import { NodeFactory } from './components/NodeFactory.tsx'
+import { PlaceholdersContext } from './context/Placeholders.context.tsx'
 
 const App = () => {
   const urlSearchParams = new URLSearchParams(window.location.search)
   const shouldRenderMap = urlSearchParams.get('map') === 'true'
-  const root = useApi()
+  const { root } = useApi()
 
   if (root === null) {
     return <p>Loading...</p>
@@ -17,7 +18,11 @@ const App = () => {
     return <pre>{JSON.stringify(root, null, 2)}</pre>
   }
 
-  return <NodeFactory node={root} />
+  return (
+    <PlaceholdersContext.Provider value={[40, 42, 45, 47]}>
+      <NodeFactory node={root} />
+    </PlaceholdersContext.Provider>
+  )
 }
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

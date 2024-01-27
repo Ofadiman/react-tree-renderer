@@ -9,5 +9,5 @@ export type ParagraphNode = {
 }
 
 export const Paragraph: FC<{ node: ParagraphNode }> = (props) => {
-  return <p className="bg-orange-100 py-5">{props.node.props.text}</p>
+  return <p className="bg-orange-100 p-3">{props.node.props.text}</p>
 }

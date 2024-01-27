@@ -10,9 +10,13 @@ export type AuthorsNode = {
 
 export const Authors: FC<{ node: AuthorsNode }> = (props) => {
   return (
-    <ul className="bg-slate-100 py-3">
+    <ul className="bg-slate-100 p-3">
       {props.node.props.authors.map((author) => {
-        return <li key={author.id}>{author.name}</li>
+        return (
+          <li key={author.id} className="my-3">
+            {author.name}
+          </li>
+        )
       })}
     </ul>
   )

@@ -11,7 +11,7 @@ export type HtmlNode = {
 export const Html: FC<{ node: HtmlNode }> = (props) => {
   return (
     <div
-      className="bg-lime-100 py-5"
+      className="bg-lime-100 p-3"
       dangerouslySetInnerHTML={{ __html: props.node.props.html }}
     ></div>
   )

@@ -214,5 +214,5 @@ export const useApi = () => {
     })()
   }, [])
 
-  return state
+  return { root: state }
 }

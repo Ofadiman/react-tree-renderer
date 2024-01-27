@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { usePlaceholdersContext } from '../context/Placeholders.context'
 
 export type PlaceholderNode = {
   id: number
@@ -9,5 +10,11 @@ export type PlaceholderNode = {
 }
 
 export const Placeholder: FC<{ node: PlaceholderNode }> = (props) => {
-  return <pre className="bg-red-300">{JSON.stringify(props.node, null, 2)}</pre>
+  const placeholdersIds = usePlaceholdersContext()
+
+  if (placeholdersIds.includes(props.node.id)) {
+    return <p className="bg-red-300 p-3">{`Rendering placeholder`}</p>
+  }
+
+  return null
 }
